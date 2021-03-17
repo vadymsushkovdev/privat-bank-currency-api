@@ -1,21 +1,21 @@
 import * as Joi from 'joi';
-import UserModel, { IUserModel } from '../Auth/models/model';
-import UserValidation from './validation';
-import { IUserService } from './interface';
+import CurrencyModel, { ICurrencyModel } from './models/model';
+import CurrencyValidation from './validations/validation';
+import { ICurrencyService } from './interfaces/interface';
 import { Types } from 'mongoose';
 
 /**
  * @export
- * @implements {IUserModelService}
+ * @implements {ICurrencyModel}
  */
-const UserService: IUserService = {
+const CurrencyService: ICurrencyService = {
     /**
      * @returns {Promise < IUserModel[] >}
      * @memberof UserService
      */
-    async findAll(): Promise < IUserModel[] > {
+    async findAll(): Promise < ICurrencyModel[] > {
         try {
-            return await UserModel.find({});
+            return await CurrencyModel.find({});
         } catch (error) {
             throw new Error(error.message);
         }
@@ -26,73 +26,40 @@ const UserService: IUserService = {
      * @returns {Promise < IUserModel >}
      * @memberof UserService
      */
-    async findOne(id: string): Promise < IUserModel > {
+    async findOne(id: string): Promise < ICurrencyModel > {
         try {
             const validate: Joi.ValidationResult < {
                 id: string
-            } > = UserValidation.getUser({
+            } > = CurrencyValidation.getCurrency({
                 id
             });
 
-            if (validate.error) {
-                throw new Error(validate.error.message);
-            }
+            if (validate.error) { throw new Error(validate.error.message); }
 
-            return await UserModel.findOne({
-                _id: Types.ObjectId(id)
-            });
+            return await CurrencyModel.findOne({ _id: Types.ObjectId(id) });
         } catch (error) {
             throw new Error(error.message);
         }
     },
 
     /**
-     * @param {IUserModel} user
-     * @returns {Promise < IUserModel >}
-     * @memberof UserService
+     * @param {ICurrencyModel} currency
+     * @returns {Promise < ICurrencyModel >}
+     * @memberof CurrencyService
      */
-    async insert(body: IUserModel): Promise < IUserModel > {
+    async insert(body: ICurrencyModel): Promise < ICurrencyModel > {
         try {
-            const validate: Joi.ValidationResult < IUserModel > = UserValidation.createUser(body);
+           // const validate: Joi.ValidationResult < ICurrencyModel > = CurrencyValidation.createCurrency(body);
 
-            if (validate.error) {
-                throw new Error(validate.error.message);
-            }
+           // if (validate.error) { throw new Error(validate.error.message); }
 
-            const user: IUserModel = await UserModel.create(body);
+            const currency: ICurrencyModel = await CurrencyModel.create(body);
 
-            return user;
-        } catch (error) {
-            throw new Error(error.message);
-        }
-    },
-
-    /**
-     * @param {string} id
-     * @returns {Promise < IUserModel >}
-     * @memberof UserService
-     */
-    async remove(id: string): Promise < IUserModel > {
-        try {
-            const validate: Joi.ValidationResult < {
-                id: string
-            } > = UserValidation.removeUser({
-                id
-            });
-
-            if (validate.error) {
-                throw new Error(validate.error.message);
-            }
-
-            const user: IUserModel = await UserModel.findOneAndRemove({
-                _id: Types.ObjectId(id)
-            });
-
-            return user;
+            return currency;
         } catch (error) {
             throw new Error(error.message);
         }
     }
 };
 
-export default UserService;
+export default CurrencyService;

@@ -1,4 +1,4 @@
-import * as connections from '../../config/connection/connection';
+import * as connections from '../../../config/connection/connection';
 import { Document, Schema } from 'mongoose';
 
 /**
@@ -7,15 +7,15 @@ import { Document, Schema } from 'mongoose';
  * @extends {Document}
  */
 export interface ICurrencyModel extends Document {
-    currency: Currencies[];
+    currency: Rates[];
     createdAt: Date;
 }
 
-export type Currencies = {
-    RUR: Rates[];
-    USD: Rates[];
-    EUR: Rates[];
-};
+//export type Currencies = {
+//    RUR: Rates[];
+ //   USD: Rates[];
+//    EUR: Rates[];
+//};
 
 export type Rates = {
     ccy: string;

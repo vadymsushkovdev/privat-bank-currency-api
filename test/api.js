@@ -1,7 +1,7 @@
 const chai = require('chai');
 const request = require('supertest');
 const app = require('../src/config/server/server').default;
-const UserModel = require('../src/components/Auth/models/model').default;
+const UserModel = require('../src/components/User/models/model').default;
 chai.should();
 
 /**

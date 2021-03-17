@@ -1,7 +1,6 @@
-import UserService from './service';
-import { HttpError } from '../../config/error';
-import { IUserModel } from '../Auth/models/model';
+import CurrencyService from './service';
 import { NextFunction, Request, Response } from 'express';
+import { ICurrencyModel } from './models/model';
 
 /**
  * @export
@@ -11,13 +10,9 @@ import { NextFunction, Request, Response } from 'express';
  * @returns {Promise < void >}
  */
 export async function findAll(req: Request, res: Response, next: NextFunction): Promise < void > {
-    try {
-        const users: IUserModel[] = await UserService.findAll();
+    const currency: ICurrencyModel[] = await CurrencyService.findAll();
 
-        res.status(200).json(users);
-    } catch (error) {
-        next(new HttpError(error.message.status, error.message));
-    }
+    res.status(200).json(currency);
 }
 
 /**
@@ -28,45 +23,8 @@ export async function findAll(req: Request, res: Response, next: NextFunction): 
  * @returns {Promise < void >}
  */
 export async function findOne(req: Request, res: Response, next: NextFunction): Promise < void > {
-    try {
-        const user: IUserModel = await UserService.findOne(req.params.id);
+    const currency: ICurrencyModel = await CurrencyService.findOne(req.params.id);
 
-        res.status(200).json(user);
-    } catch (error) {
-        next(new HttpError(error.message.status, error.message));
-    }
+    res.status(200).json(currency);
 }
 
-/**
- * @export
- * @param {Request} req
- * @param {Response} res
- * @param {NextFunction} next
- * @returns {Promise < void >}
- */
-export async function create(req: Request, res: Response, next: NextFunction): Promise < void > {
-    try {
-        const user: IUserModel = await UserService.insert(req.body);
-
-        res.status(201).json(user);
-    } catch (error) {
-        next(new HttpError(error.message.status, error.message));
-    }
-}
-
-/**
- * @export
- * @param {Request} req
- * @param {Response} res
- * @param {NextFunction} next
- * @returns {Promise < void >}
- */
-export async function remove(req: Request, res: Response, next: NextFunction): Promise < void > {
-    try {
-        const user: IUserModel = await UserService.remove(req.params.id);
-
-        res.status(200).json(user);
-    } catch (error) {
-        next(new HttpError(error.message.status, error.message));
-    }
-}

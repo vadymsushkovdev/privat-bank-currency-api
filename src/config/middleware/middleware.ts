@@ -6,6 +6,7 @@ import * as express from 'express';
 import * as helmet from 'helmet';
 import { HttpError } from '../error/index';
 import { sendHttpErrorModule } from '../error/sendHttpError';
+import getPrivatCurrency from '../../components/Currency/modules/currencies_getter';
 /**
  * @export
  * @param {express.Application} app
@@ -19,7 +20,6 @@ export function configure(app: express.Application): void {
     app.use(helmet());
     app.use(cors());
     app.use(sendHttpErrorModule);
-
     app.use((req, res, next) => {
         res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS ');
         res.header(

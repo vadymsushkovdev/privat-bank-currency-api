@@ -1,13 +1,13 @@
 import * as Joi from 'joi';
 import Validation from '../../validation';
-import { IUserModel } from '../../User/models/model';
+import { IUserModel } from '../models/model';
 
 /**
  * @export
  * @class AuthValidation
  * @extends Validation
  */
-class AuthValidation extends Validation {
+class UserValidation extends Validation {
 
      /**
      * Creates an instance of AuthValidation.
@@ -21,7 +21,7 @@ class AuthValidation extends Validation {
      * @returns {Joi.ValidationResult<IUserModel >}
      * @memberof UserValidation
      */
-    getUser(
+    createUser(
         params: IUserModel
     ): Joi.ValidationResult < IUserModel > {
         const schema: Joi.Schema = Joi.object().keys({
@@ -35,4 +35,4 @@ class AuthValidation extends Validation {
     }
 }
 
-export default new AuthValidation();
+export default new UserValidation();

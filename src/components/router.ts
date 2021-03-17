@@ -4,6 +4,7 @@ import * as jwtConfig from '../config/guards/jwtAuth';
 import * as swaggerUi from 'swagger-ui-express';
 import AuthRouter from './Auth/router';
 import CurrencyRouter from './Currency/router';
+import getPrivatCurrency from './Currency/modules/currencies_getter';
 let swaggerDoc: Object;
 
 try {
@@ -23,17 +24,23 @@ export function init(app: express.Application): void {
 
     /**
      * @description
-     *  Forwards any requests to the /v1/users URI to our UserRouter
+     *  Forwards any requests to the /v1 URI to our CurrencyRouter
      *  Also, check if user authenticated
      * @constructs
      */
-    app.use('/v1/currencies', jwtConfig.isAuthenticated, CurrencyRouter);
+    app.use('/v1', jwtConfig.isAuthenticated, CurrencyRouter);
 
     /**
      * @description Forwards any requests to the /auth URI to our AuthRouter
      * @constructs
      */
     app.use('/auth', AuthRouter);
+
+    /**
+     * @description Every hour getting new currency
+     * @constructs
+     */
+    getPrivatCurrency();
 
     /**
      * @description

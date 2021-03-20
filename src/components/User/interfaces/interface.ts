@@ -2,7 +2,7 @@ import { IUserModel } from '../models/model';
 
 /**
  * @export
- * @interaface IAuthService
+ * @interaface IUserService
  */
 export interface IUserService {
     /**

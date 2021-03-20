@@ -7,15 +7,15 @@ import { ICurrencyModel } from '../models/model';
 export interface ICurrencyService {
 
     /**
-     * @returns {Promise<IUserModel[]>}
-     * @memberof IUserService
+     * @returns {Promise<ICurrencyModel[]>}
+     * @memberof ICurrencyService
      */
     findAll(): Promise<ICurrencyModel[]>;
 
     /**
      * @param {string} code
-     * @returns {Promise<IUserModel>}
-     * @memberof IUserService
+     * @returns {Promise<ICurrencyModel>}
+     * @memberof ICurrencyService
      */
     findOne(code: string): Promise<ICurrencyModel>;
 

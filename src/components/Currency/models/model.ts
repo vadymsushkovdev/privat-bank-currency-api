@@ -11,12 +11,6 @@ export interface ICurrencyModel extends Document {
     createdAt: Date;
 }
 
-//export type Currencies = {
-//    RUR: Rates[];
- //   USD: Rates[];
-//    EUR: Rates[];
-//};
-
 export type Rates = {
     ccy: string;
     base_ccy: string;

@@ -27,12 +27,9 @@ export function isAuthenticated(req: RequestWithUser, res: Response, next: NextF
 
     if (!token) { return next(new HttpError(400, 'No token provided')); }
     try {
-        const user: object | string = jwt.verify(token, app.get('secret'));
-
-        req.user = user;
+        req.user = jwt.verify(token, app.get('secret'));
 
         return next();
-
     } catch (error) {
         return next(new HttpError(401, http.STATUS_CODES[401]));
     }

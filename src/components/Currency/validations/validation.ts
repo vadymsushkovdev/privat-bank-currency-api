@@ -4,38 +4,23 @@ import { ICurrencyModel } from '../models/model';
 
 /**
  * @export
- * @class UserValidation
+ * @class CurrencyValidation
  * @extends Validation
  */
 class CurrencyValidation extends Validation {
 
     /**
-     * Creates an instance of UserValidation.
-     * @memberof UserValidation
+     * Creates an instance of CurrencyValidation.
+     * @memberof CurrencyValidation
      */
     constructor() {
         super();
     }
 
     /**
-     * @param {IUserModel} params
-     * @returns {Joi.ValidationResult<IUserModel >}
-     * @memberof UserValidation
-     */
-    createCurrency(
-        params: ICurrencyModel
-    ): Joi.ValidationResult < ICurrencyModel > {
-        const schema: Joi.Schema = Joi.object().keys({
-
-        });
-
-        return Joi.validate(params, schema);
-    }
-
-    /**
      * @param {{ id: string }} body
      * @returns {Joi.ValidationResult<{ id: string }>}
-     * @memberof UserValidation
+     * @memberof CurrencyValidation
      */
     getCurrency(
         body: {
